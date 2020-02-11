@@ -16,7 +16,6 @@ class Voiture{
     void Frein();
     void Pneus();
     void Physique();
-    void progressbar(int value);
 
 private:
 

@@ -21,19 +21,40 @@ int Voiture::getNum() const {
     return numero;
 }
 
-void Voiture::AfficherEtat() const {
+void progressbar(int value) {
+    cout << "[";
+    for (int i = 0; i < value/4; i++){
+        cout << "=";
+    }
+    cout << ">";
+    for (int i = 0; i < 100/4 - value/4; i++){
+        cout << " ";
+    }
+    cout << "]  "<< value << "%" << endl;
+}
+
+void Voiture::AfficherEtat() const{
     cout << "Etat de la voiture numero " << numero << endl;
-    cout << "Pression des pneus    | " << pression_pneu << "%" << endl;
-    cout << "Usure des pneus       | " << usure_pneu << "%" << endl;
-    cout << "Etat des freins       | " << frein << "%" << endl;
-    cout << "Etat du moteur        | " << moteur << "%" << endl;
-    cout << "Niveau d'huile        | " << niveau_huile << "%" << endl;
-    cout << "Etat de la carosserie | " << carosserie << "%" << endl;
-    cout << "Etat des suspensions  | " << suspensions << "%" << endl;
-    cout << "Etat de la direction  | " << direction << "%" << endl;
-    cout << "Etat de la boite      | " << boite_vitesse << "%" << endl;
-    cout << "Niveau de l'essence : ";
-    progressbar(int essence);
+    cout << "Pression des pneus    : ";
+    progressbar(pression_pneu);
+    cout << "Usure des pneus       : ";
+    progressbar(usure_pneu);
+    cout << "Etat des freins       : ";
+    progressbar(frein);
+    cout << "Etat du moteur        : ";
+    progressbar(moteur);
+    cout << "Niveau d'huile        : ";
+    progressbar(niveau_huile);
+    cout << "Etat de la carosserie : ";
+    progressbar(carosserie);
+    cout << "Etat des suspensions  : ";
+    progressbar(suspensions);
+    cout << "Etat de la direction  : ";
+    progressbar(direction);
+    cout << "Etat de la boite      : ";
+    progressbar(boite_vitesse);
+    cout << "Niveau de l'essence   : ";
+    progressbar(essence);
 }
 
 void Voiture::Vitesse() {
@@ -93,17 +114,7 @@ void Voiture::Physique(){
     suspensions -= 1;
 }
 
-void progressbar(int value) {
-    cout << "[";
-    for (int i = 0; i < value/4; i++){
-        cout << "=";
-    }
-    cout << ">";
-    for (int i = 0; i < 100/4 - value/4; i++){
-        cout << " ";
-    }
-    cout << "]" << endl;
-}
+
 
 
 

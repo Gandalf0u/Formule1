@@ -12,7 +12,7 @@ public:
 
 private:
     int lap = 0;
-    int usure = 0;
+    int usure = 1;
 };
 
 #endif //FORMUL111_PISTE_H
