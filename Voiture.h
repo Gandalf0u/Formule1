@@ -5,17 +5,19 @@
 
 class Voiture{
 
-    public:
+public:
 
     Voiture(int numero);
     void AfficherEtat() const;
-    bool Jeu() const;
     int getNum() const;
     void Vitesse();
     void Essence();
     void Frein();
     void Pneus();
     void Physique();
+    bool getEnVie();
+    void Reparer();
+    void verif();
 
 private:
 
@@ -32,8 +34,11 @@ private:
 
     int position;
 
-    int nb_voiture = 2;
     int numero;
+    int vitesse = 323;
+    int Moyenne = 0;
+    int time = 0;
+    bool enVie = true;
 
     Piste circuit;
 };

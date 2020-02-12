@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include <stdlib.h>
 #include <fstream>
 
 //Class Voiture
@@ -16,7 +17,7 @@ int tour = 0;
 
 int main() {
     //Initialisatipon du temps pour l'aléatoire
-    srand(time(0));
+    srand(time(NULL));
 
     //Construction des objets
     Piste circuit;
@@ -31,11 +32,19 @@ int main() {
 
         //Usure d'un tour de piste
         for (int i = 0; i < 2; i++) {
-            if (voiture[i]->Jeu()) {
+            if (voiture[i]->getEnVie()) {
                 voiture[i]->Essence();
                 voiture[i]->Frein();
                 voiture[i]->Pneus();
                 voiture[i]->Physique();
+                voiture[i]->Vitesse();
+            }
+        }
+
+        //Verification de l'etat si la voiture roule encore
+        for (int i = 0; i < 2; i++) {
+            if (voiture[i]->getEnVie()) {
+                voiture[i]->verif();
             }
         }
 
@@ -49,7 +58,7 @@ int main() {
         //Fin du tour de piste
 
         for (int i = 0; i < 2; i++) {
-            if (voiture[i]->Jeu()) {
+            if (voiture[i]->getEnVie()) {
                 voiture[i]->AfficherEtat();
                 char choice = 'x';
                 while (choice != 'O' and choice != 'o' and choice != 'n' and choice != 'N') {
@@ -58,12 +67,18 @@ int main() {
                 }
                 if (choice == 'o' or choice == 'O') {
                     cout << "La voiture " << voiture[i]->getNum() << " s'est arrete" << endl << endl;
+                    voiture[i]->Reparer();
                 }
                 else if (choice == 'n' or choice == 'N') {
                     cout << "La voiture " << voiture[i]->getNum() << " ne s'est pas arrete" << endl << endl;
                 }
 
             }
+        }
+
+        if (! voiture1.getEnVie() and ! voiture2.getEnVie()) {
+            cout << "Les 2 voitures dont vous etiez responsable sont detruites ou en panne, vous decidez de fuir." << endl;
+            break;
         }
 
     }
