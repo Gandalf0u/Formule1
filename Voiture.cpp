@@ -8,7 +8,6 @@ Voiture::Voiture(int num){
     numero = num;
 }
 
-
 void Voiture::verif() {
     if (essence <= 0) {
         enVie = false;
@@ -16,11 +15,11 @@ void Voiture::verif() {
     }
     if (pression_pneu <= 0) {
         enVie = false;
-        cout << "La voiture " << numero << " a eu un probleme lie a l'usure de ses pneus et a declare forfait" << endl;
+        cout << "La voiture " << numero << " a eu un probleme lie a la pression de ses pneus et a declare forfait" << endl;
     }
     if (usure_pneu <= 0) {
         enVie = false;
-        cout << "La voiture " << numero << " a eu un probleme lie a la pression des pneus et a declare forfait" << endl;
+        cout << "La voiture " << numero << " a eu un probleme lie a l'usure de ses pneus et a declare forfait" << endl;
     }
     if (frein <= 0) {
         enVie = false;
@@ -32,7 +31,7 @@ void Voiture::verif() {
     }
     if (carosserie <= 0) {
         enVie = false;
-        cout << "La voiture " << numero << " ne peut continuer la course car sa carosserie l'en empeche" << endl;
+        cout << "La voiture " << numero << " ne peut continuer la course car les degats sur sa carosserie l'en empeche" << endl;
     }
     if (suspensions <= 0) {
         enVie = false;
@@ -40,7 +39,7 @@ void Voiture::verif() {
     }
     if (direction <= 0) {
         enVie = false;
-        cout << "La voiture " << numero << "a un probleme de direction  et doit declarer forfait" << endl;
+        cout << "La voiture " << numero << "a un probleme de direction et doit declarer forfait" << endl;
     }
     if (boite_vitesse <= 0) {
         enVie = false;
@@ -55,6 +54,10 @@ bool Voiture::getEnVie() {
 
 int Voiture::getNum() const {
     return numero;
+}
+
+int Voiture::getTime() const {
+    return time;
 }
 
 void progressbar(int value) {
@@ -73,8 +76,7 @@ void progressbar(int value) {
 }
 
 void Voiture::AfficherEtat() const{
-    cout << "Vitesse de la voiture a ce tour : " << vitesse << endl;
-    cout << "Temps de la voiture depuis le depart : " << time << endl << endl;
+    cout << "Vitesse moyenne de la voiture "<< numero << "durant ce tour : " << vitesse << "km/h" << endl << endl;
     cout << "Etat de la voiture numero " << numero << ":" << endl << endl;
     cout << "Pression des pneus    : ";
     progressbar(pression_pneu);
@@ -100,6 +102,9 @@ void Voiture::AfficherEtat() const{
 
 void Voiture::Vitesse() {
     Moyenne = 100 - (pression_pneu/2 + usure_pneu/2 + frein*(3/2) + moteur*3 + niveau_huile/2 + carosserie/2 + suspensions + direction + boite_vitesse*2) / 10;
+    if (Moyenne < 0){
+        Moyenne = 0;
+    }
     vitesse = vitesse - Moyenne;
     time = time + vitesse;
 }
@@ -119,18 +124,35 @@ void Voiture::Frein() { //A revoir quand on aura fini
 }
 
 void Voiture::Pneus() {
-    pression_pneu = pression_pneu - 1 - (10 - circuit.getUsure()/10);
-    if (usure_pneu < 50) {
-        pression_pneu -= 4;
+    int random2;
+    random2 = rand()%((4 - 1) + 1) + 1;
+    pression_pneu = pression_pneu - random2 - circuit.getUsure()/10;
+    if (usure_pneu < 75 and usure_pneu > 50 and 25 < frein and frein < 50) {
+       pression_pneu = pression_pneu - 2;
     }
-    if (circuit.getUsure() < 50) {
-        usure_pneu -= circuit.getUsure() / 10;
+    if (usure_pneu < 30 and usure_pneu < 50 and 25 < frein and frein < 50) {
+        pression_pneu = pression_pneu - 3;
     }
-    if (circuit.getUsure() > 50) {
-        usure_pneu -= circuit.getUsure() / 15 - 5;
+    if ( usure_pneu < 50) {
+        pression_pneu -= 2;
     }
-    else {
-        usure_pneu -= 7;
+    int random;
+    random = rand()%((5 - 1) + 1) + 1;
+    usure_pneu -= random;
+    if (0 < circuit.getUsure() and circuit.getUsure() < 5) {
+        usure_pneu -= circuit.getUsure();
+    }
+    if (5 < circuit.getUsure() and circuit.getUsure() < 10) {
+        usure_pneu -= circuit.getUsure()/2;
+    }
+    if (10 < circuit.getUsure() and circuit.getUsure() < 20) {
+        usure_pneu -= circuit.getUsure()/4;
+    }
+    if (20 < circuit.getUsure() and circuit.getUsure() < 50) {
+        usure_pneu -= circuit.getUsure() / 7;
+    }
+    if (100 < circuit.getUsure() and circuit.getUsure() > 50) {
+        usure_pneu -= circuit.getUsure() /15 - 5;
     }
 }
 
@@ -221,7 +243,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (usure_pneu != 100) {
                         usure_pneu = 100;
-                        time = time + 20;
+                        time = time + 40;
                         cout << "Les pneus ont ete change" << endl;
                     }
                     else {
@@ -231,7 +253,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (pression_pneu != 100) {
                         pression_pneu = 100;
-                        time = time + 10;
+                        time = time + 30;
                         cout << "Les pneus ont ete regonfle" << endl;
                     }
                     else {
@@ -241,7 +263,7 @@ void Voiture::Reparer () {
                 case 3:
                     if (suspensions != 100) {
                         suspensions = 100;
-                        time = time + 25;
+                        time = time + 45;
                         cout << "Les suspensions ont ete change" << endl;
                     }
                     else {
@@ -251,7 +273,7 @@ void Voiture::Reparer () {
                 case 4:
                     if (frein != 100) {
                         frein = 100;
-                        time = time + 30;
+                        time = time + 50;
                         cout << "Les freins ont ete change" << endl;
                     }
                     else {
@@ -278,7 +300,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (moteur != 100) {
                         moteur = 100;
-                        time = time + 50;
+                        time = time + 70;
                         cout << "Le moteur a ete repare" << endl;
                     }
                     else {
@@ -288,7 +310,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (boite_vitesse != 100) {
                         boite_vitesse = 100;
-                        time = time + 45;
+                        time = time + 65;
                         cout << "La boite de vitesse à ete repare" << endl;
                     }
                     else {
@@ -315,7 +337,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (carosserie != 100) {
                         carosserie = 100;
-                        time = time + 30;
+                        time = time + 50;
                         cout << "La carosserie a ete repare" << endl;
                     }
                     else {
@@ -325,7 +347,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (direction != 100) {
                         direction = 100;
-                        time = time + 15;
+                        time = time + 35;
                         cout << "La direction a ete passe en revus" << endl;
                     }
                     else {
@@ -352,7 +374,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (essence != 100) {
                         essence = 100;
-                        time = time + 40;
+                        time = time + 60;
                         cout << "Le plein d'essence a ete fait" << endl;
                     }
                     else {
@@ -362,7 +384,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (niveau_huile != 100) {
                         niveau_huile = 100;
-                        time = time + 20;
+                        time = time + 40;
                         cout << "Le niveau d'huile a ete fait" << endl;
                     }
                     else {
@@ -378,6 +400,51 @@ void Voiture::Reparer () {
             }
         } while(c != 'q');
     }
+    }
+}
+
+//reparation bot
+void Voiture::BotRepair() {
+    
+    int* ListeEntites[10] = {&pression_pneu, &usure_pneu, &frein, &moteur, &niveau_huile, &essence, &carosserie, &suspensions, &boite_vitesse, &direction};
+    int ListTime[10] = {30, 40, 50, 70, 40, 60, 50, 45, 65, 35};
+    
+    for (int i = 0; i < 9; i++) {
+        if (*ListeEntites[i] > 80 and *ListeEntites[i] < 100 ) {
+            int random = rand()%((13 - 1) + 1) + 1;
+            if (random == 10) {
+                *ListeEntites[i] = 100;
+                time = time + ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 60 and *ListeEntites[i] < 80 ) {
+            int random = rand()%((11 - 1) + 1) + 1;
+            if (random == 6 or random == 2) {
+                *ListeEntites[i] = 100;
+                time = time + ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 40 and *ListeEntites[i] < 60 ) {
+            int random = rand()%((8 - 1) + 1) + 1;
+            if (random == 6 or random == 1) {
+                *ListeEntites[i] = 100;
+                time = time + ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 20 and *ListeEntites[i] < 40 ) {
+            int random = rand()%((6 - 1) + 1) + 1;
+            if (random == 1 or random == 2) {
+                *ListeEntites[i] = 100;
+                time = time + ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 0 and *ListeEntites[i] < 20 ) {
+            int random = rand()%((4 - 0) + 1) + 0;
+            if (random == 2 or random == 1) {
+                *ListeEntites[i] = 100;
+                time = time + ListTime[i];
+            }
+        }
     }
 }
 

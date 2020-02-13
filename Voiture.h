@@ -18,6 +18,8 @@ public:
     bool getEnVie();
     void Reparer();
     void verif();
+    void BotRepair();
+    int getTime() const;
 
 private:
 
@@ -35,7 +37,7 @@ private:
     int position;
 
     int numero;
-    int vitesse = 323;
+    int vitesse = 350;
     int Moyenne = 0;
     int time = 0;
     bool enVie = true;

@@ -2,7 +2,7 @@
 #include <random>
 #include <ctime>
 #include <stdlib.h>
-#include <fstream>
+#include <map>
 
 //Class Voiture
 #include "Voiture.h"
@@ -21,8 +21,8 @@ int main() {
 
     //Construction des objets
     Piste circuit;
-    Voiture voiture1(1), voiture2(2);
-    Voiture *voiture[2] = {&voiture1, &voiture2};
+    Voiture voiture1(1), voiture2(2), voiture3(3), voiture4(4), voiture5(5), voiture6(6), voiture7(7), voiture8(8), voiture9(9), voiture10(10), voiture11(11), voiture12(12), voiture13(13), voiture14(14), voiture15(15), voiture16(16), voiture17(17), voiture18(18), voiture19(19), voiture20(20), voiture21(21), voiture22(22);
+    Voiture *voiture[22] = {&voiture1, &voiture2, &voiture3, &voiture4, &voiture5, &voiture6, &voiture7, &voiture8, &voiture9, &voiture10, &voiture11, &voiture12, &voiture13, &voiture14, &voiture15, &voiture16, &voiture17, &voiture18, &voiture19, &voiture20, &voiture21, &voiture22};
 
     while(tour < 50 ){
         cout << "=================" << endl;
@@ -30,8 +30,12 @@ int main() {
         // Affichage de l'usure de la piste
         circuit.affichage();
 
+        //========================================
+        //Usure des voitures et verif si apte a continuer
+        //========================================
+
         //Usure d'un tour de piste
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 22; i++) {
             if (voiture[i]->getEnVie()) {
                 voiture[i]->Essence();
                 voiture[i]->Frein();
@@ -42,22 +46,66 @@ int main() {
         }
 
         //Verification de l'etat si la voiture roule encore
-        for (int i = 0; i < 2; i++) {
+        // Elle est mise hors course si non apte
+        for (int i = 0; i < 22; i++) {
             if (voiture[i]->getEnVie()) {
                 voiture[i]->verif();
             }
         }
 
+        //Usure de la piste
+        circuit.addLap();
+
         tour += 1;
         cout << "FIN DU TOUR " << tour << endl;
         cout << "=================" << endl;
 
-        //Usure de la piste
-        circuit.addLap();
+        //CLASSEMENT
 
+       multimap <int, int, greater<int>> classement;
+       for (int i = 0; i < 22; i++) {
+           /*classement[i+1] = voiture[i]->getTime();*/
+           classement.insert(make_pair(voiture[i]->getTime(),i+1));
+       }
+       int i = 0;
+       int pos1 = 0;
+       int pos2 = 0;
+       for (auto const& entry: classement) {
+           i = i + 1;
+           if (entry.second == 1) {
+               pos1 = i;
+           }
+           if (entry.second == 2) {
+               pos2 = i;
+           }
+       }
+       if (pos1 == 1 ) {
+           cout << "VOITURE 1 : " << pos1 << "er";
+       }
+       else {
+           cout << "VOITURE 1 : " << pos1 << "eme";
+       }
+        if (pos1 == 1 ) {
+            cout << "  et VOITURE 2 : " << pos2 << "er." << endl;
+        }
+        else {
+            cout << "  et VOITURE 2 : " << pos2 << "eme." << endl;
+        }
+
+
+        //========================================
         //Fin du tour de piste
+        //========================================
 
-        for (int i = 0; i < 2; i++) {
+        // Reparation des voitures bot
+        for (int i = 2; i < 22; i++) {
+            if (voiture[i]->getEnVie()) {
+                voiture[i]->BotRepair();
+            }
+        }
+
+        // reparations des voitures du joueur
+        for (int i = 0; i <= 1; i++) {
             if (voiture[i]->getEnVie()) {
                 voiture[i]->AfficherEtat();
                 char choice = 'x';
