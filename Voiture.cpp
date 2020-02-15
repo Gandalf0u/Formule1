@@ -1,8 +1,11 @@
 #include "Voiture.h"
 #include "Piste.h"
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 Voiture::Voiture(int num){
     numero = num;
@@ -72,11 +75,23 @@ void progressbar(int value) {
     for (int i = 0; i < 100/4 - value/4; i++){
         cout << " ";
     }
-    cout << "]  "<< value << "%" << endl;
+    cout << "]  ";
+    if( value < 70 and value > 40) {
+        SetConsoleTextAttribute(hConsole, 6);
+    }
+    else if( value < 40 ) {
+        SetConsoleTextAttribute(hConsole, 12);
+    }
+    else {
+        SetConsoleTextAttribute(hConsole, 10);
+    }
+    cout << value << "%" << endl;
+
+    SetConsoleTextAttribute(hConsole, 0);
 }
 
 void Voiture::AfficherEtat() const{
-    cout << "Vitesse moyenne de la voiture "<< numero << "durant ce tour : " << vitesse << "km/h" << endl << endl;
+    cout << "Vitesse moyenne de la voiture "<< numero << " durant ce tour : " << vitesse << "km/h" << endl << endl;
     cout << "Etat de la voiture numero " << numero << ":" << endl << endl;
     cout << "Pression des pneus    : ";
     progressbar(pression_pneu);
