@@ -9,6 +9,7 @@
 #include "Voiture.h"
 // Class Piste
 #include "Piste.h"
+#include <unistd.h>
 
 using namespace std;
 
@@ -29,8 +30,34 @@ int main() {
     Voiture voiture1(1), voiture2(2), voiture3(3), voiture4(4), voiture5(5), voiture6(6), voiture7(7), voiture8(8), voiture9(9), voiture10(10), voiture11(11), voiture12(12), voiture13(13), voiture14(14), voiture15(15), voiture16(16), voiture17(17), voiture18(18), voiture19(19), voiture20(20), voiture21(21), voiture22(22);
     Voiture *voiture[22] = {&voiture1, &voiture2, &voiture3, &voiture4, &voiture5, &voiture6, &voiture7, &voiture8, &voiture9, &voiture10, &voiture11, &voiture12, &voiture13, &voiture14, &voiture15, &voiture16, &voiture17, &voiture18, &voiture19, &voiture20, &voiture21, &voiture22};
 
+    cout << endl << "Bienvenue au grand prix d'Australie !! " << endl;
+    usleep(1300000);
+    cout << "Tenez vous pret, la course va commencer..." << endl << endl;
+    usleep(1300000);
+    cout << "Depart des voitures dans...";
+    usleep(1100000);
+    cout << "3....";
+    usleep(1120000);
+    cout << "2....";
+    usleep(1120000);
+    cout << "1...." << endl;
+    usleep(900000);
+    cout << "GOOOO" << endl;
+    usleep(1200000);
+
     while(tour < 50 ){
-        cout << "=================" << endl;
+
+        for (int i=0; i < 22; i++) {
+            cout << "...";
+            usleep(20000);
+            if (i == 22){
+                cout << "..." << endl;
+            }
+        }
+
+        cout << ".." << endl,
+
+        cout << endl << "=================" << endl;
 
         // Affichage de l'usure de la piste
         circuit.affichage();
@@ -63,7 +90,7 @@ int main() {
 
         tour += 1;
         cout << "FIN DU TOUR " << tour << endl;
-        cout << "=================" << endl;
+        cout << "=================" << endl << endl;
 
         //CLASSEMENT
 
@@ -90,13 +117,13 @@ int main() {
        else {
            cout << "VOITURE 1 : " << pos1 << "eme";
        }
-        if (pos1 == 1 ) {
+       if (pos2 == 1 ) {
             cout << "  et VOITURE 2 : " << pos2 << "er." << endl;
-        }
-        else {
+       }
+       else {
             cout << "  et VOITURE 2 : " << pos2 << "eme." << endl;
-        }
-
+       }
+        cout << "time total voiture 1: " << voiture1.getTime() << endl;
 
         //========================================
         //Fin du tour de piste

@@ -13,7 +13,6 @@ void Piste::addLap() {
     lap += 1;
     int random = rand() % 4 + 2;
     usure += random;
-    cout << "piste: " << usure << endl;
 }
 
 int Piste::getLap() const {

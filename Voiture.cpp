@@ -12,6 +12,7 @@ Voiture::Voiture(int num){
 }
 
 void Voiture::verif() {
+    SetConsoleTextAttribute(hConsole, 12);
     if (essence <= 0) {
         enVie = false;
         cout << "La voiture " << numero << " est en panne d'essence et est disqualifie" << endl;
@@ -48,6 +49,7 @@ void Voiture::verif() {
         enVie = false;
         cout << "La voiture " << numero << "a eu un probleme de boite de vitesse et doit declarer forfait" << endl;
     }
+    SetConsoleTextAttribute(hConsole, 15);
 
 }
 
@@ -87,7 +89,7 @@ void progressbar(int value) {
     }
     cout << value << "%" << endl;
 
-    SetConsoleTextAttribute(hConsole, 0);
+    SetConsoleTextAttribute(hConsole, 15);
 }
 
 void Voiture::AfficherEtat() const{
@@ -241,25 +243,34 @@ void Voiture::Reparer () {
     //system("CLS"); NE FONCTIONNE PAS AVEC TOUTES LES FACONS D'EXECUTER
     int choix=0, choix2;
     char c = 'x';
+    SetConsoleTextAttribute(hConsole, 11);
     cout << "Bienvenue dans l'assistat de reparation de la voiture " << numero << endl;
     cout << "Que voulez reparer ? " << endl;
+    SetConsoleTextAttribute(hConsole, 15);
 
     while (choix != 5) {
+    SetConsoleTextAttribute(hConsole, 11);
     cout << "[1]Roues et freins      [2]Moteur      [3]Carosserie et direction      [4]Essence et niveaux d'huile      [5]Quitter" << endl;
+        SetConsoleTextAttribute(hConsole, 15);
     cin >> choix;
     
     //Reparation des pneus
     if (choix == 1) {
         do {
+            c = 'x';
+            SetConsoleTextAttribute(hConsole, 11);
             cout << endl << "Reparation des Pneus:" << endl;
-            cout << "[1]Changer Pneus [2]Gonfler les Pneus [3]Changer les Suspensions [4]Changer les Freins [5]Retour" << endl;
+            cout << "[1]Changer Pneus       [2]Gonfler les Pneus        [3]Changer les Suspensions      [4]Changer les Freins       [5]Retour" << endl;
+            SetConsoleTextAttribute(hConsole, 15);
             cin >> choix2;
             switch(choix2) {
                 case 1:
                     if (usure_pneu != 100) {
                         usure_pneu = 100;
-                        time = time + 40;
+                        time = time - 30;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les pneus ont ete change" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Les pneus n'ont pas besoin d'etre repare" << endl;
@@ -268,8 +279,10 @@ void Voiture::Reparer () {
                 case 2:
                     if (pression_pneu != 100) {
                         pression_pneu = 100;
-                        time = time + 30;
+                        time = time - 20;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les pneus ont ete regonfle" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Les pneus n'ont pas besoin d'etre regonfle" << endl;
@@ -278,8 +291,10 @@ void Voiture::Reparer () {
                 case 3:
                     if (suspensions != 100) {
                         suspensions = 100;
-                        time = time + 45;
+                        time = time - 40;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les suspensions ont ete change" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Les suspensions n'ont pas besoin d'etre repare" << endl;
@@ -288,8 +303,10 @@ void Voiture::Reparer () {
                 case 4:
                     if (frein != 100) {
                         frein = 100;
-                        time = time + 50;
+                        time = time - 50;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les freins ont ete change" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Les freins n'ont pas besoin d'etre change" << endl;
@@ -299,7 +316,9 @@ void Voiture::Reparer () {
                     c = 'q';
                     break;
                 default:
-                    cout << "error" << endl;
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << "erreur, entrez un nombre valide" << endl;
+                    SetConsoleTextAttribute(hConsole, 15);
                     break;
             }
         } while(c != 'q');
@@ -308,15 +327,20 @@ void Voiture::Reparer () {
     // Reparation du moteur
     else if(choix == 2) {
         do {
+            c = 'x';
+            SetConsoleTextAttribute(hConsole, 11);
             cout << endl  << "Reparation du Moteur:" << endl;
-            cout << "[1]Changer Moteur     [2]Boite de vitesse      [3]Retour" << endl;
+            cout << "[1]Changer Moteur      [2]Boite de vitesse     [3]Retour" << endl;
+            SetConsoleTextAttribute(hConsole, 15);
             cin >> choix2;
             switch(choix2) {
                 case 1:
                     if (moteur != 100) {
                         moteur = 100;
-                        time = time + 70;
+                        time = time - 70;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le moteur a ete repare" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Le moteur n'a pas besoin d'etre repare" << endl;
@@ -325,8 +349,10 @@ void Voiture::Reparer () {
                 case 2:
                     if (boite_vitesse != 100) {
                         boite_vitesse = 100;
-                        time = time + 65;
-                        cout << "La boite de vitesse à ete repare" << endl;
+                        time = time - 65;
+                        SetConsoleTextAttribute(hConsole, 10);
+                        cout << "La boite de vitesse a ete repare" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "La boite de vitesse n'a pas besoin d'etre repare" << endl;
@@ -336,7 +362,9 @@ void Voiture::Reparer () {
                     c = 'q';
                     break;
                 default:
-                    cout << "error" << endl;
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << "erreur, entrez un nombre valide" << endl;
+                    SetConsoleTextAttribute(hConsole, 15);
                     break;
             }
         } while(c != 'q');
@@ -345,15 +373,20 @@ void Voiture::Reparer () {
     //Reparation de la carosserie
     else if(choix == 3) {
         do {
+            c = 'x';
+            SetConsoleTextAttribute(hConsole, 11);
             cout << endl << "Reparation de la Carosserie:" << endl;
-            cout << "[1]Changer Carosserie [2]Changer Direction [3]Retour" << endl;
+            cout << "[1]Changer Carosserie      [2]Changer Direction        [3]Retour" << endl;
+            SetConsoleTextAttribute(hConsole, 15);
             cin >> choix2;
             switch(choix2) {
                 case 1:
                     if (carosserie != 100) {
                         carosserie = 100;
-                        time = time + 50;
+                        time = time - 50;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "La carosserie a ete repare" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "La carosserie n'a pas besoin d'etre remplace" << endl;
@@ -362,8 +395,10 @@ void Voiture::Reparer () {
                 case 2:
                     if (direction != 100) {
                         direction = 100;
-                        time = time + 35;
-                        cout << "La direction a ete passe en revus" << endl;
+                        time = time - 35;
+                        SetConsoleTextAttribute(hConsole, 10);
+                        cout << "La direction a ete passe en revue" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "La direction n'a pas besoin d'une révision" << endl;
@@ -373,7 +408,9 @@ void Voiture::Reparer () {
                     c = 'q';
                     break;
                 default:
-                    cout << "error" << endl;
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << "erreur, entrez un nombre valide" << endl;
+                    SetConsoleTextAttribute(hConsole, 15);
                     break;
             }
         } while(c != 'q');
@@ -382,15 +419,20 @@ void Voiture::Reparer () {
     //Essence et niveaux d'huile
     else if(choix == 4) {
         do {
+            c = 'x';
+            SetConsoleTextAttribute(hConsole, 11);
             cout << endl << "Essence et niveau d'huile:" << endl;
-            cout << "[1]Essence [2]Niveau d'huile [3]Retour" << endl;
+            cout << "[1]Essence     [2]Niveau d'huile       [3]Retour" << endl;
+            SetConsoleTextAttribute(hConsole, 15);
             cin >> choix2;
             switch(choix2) {
                 case 1:
                     if (essence != 100) {
                         essence = 100;
-                        time = time + 60;
+                        time = time - 60;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le plein d'essence a ete fait" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Le plein d'essence n'a pas besoin d'etre fait" << endl;
@@ -399,8 +441,10 @@ void Voiture::Reparer () {
                 case 2:
                     if (niveau_huile != 100) {
                         niveau_huile = 100;
-                        time = time + 40;
+                        time = time - 40;
+                        SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le niveau d'huile a ete fait" << endl;
+                        SetConsoleTextAttribute(hConsole, 15);
                     }
                     else {
                         cout << "Le niveau d'huile n'a pas besoin d'etre verifie" << endl;
@@ -410,7 +454,9 @@ void Voiture::Reparer () {
                     c = 'q';
                     break;
                 default:
-                    cout << "error" << endl;
+                    SetConsoleTextAttribute(hConsole, 12);
+                    cout << "erreur, entrez un nombre valide" << endl;
+                    SetConsoleTextAttribute(hConsole, 15);
                     break;
             }
         } while(c != 'q');
@@ -426,38 +472,38 @@ void Voiture::BotRepair() {
     
     for (int i = 0; i < 9; i++) {
         if (*ListeEntites[i] > 80 and *ListeEntites[i] < 100 ) {
-            int random = rand()%((13 - 1) + 1) + 1;
+            int random = rand()%((12 - 2) + 1) + 2;
             if (random == 10) {
                 *ListeEntites[i] = 100;
-                time = time + ListTime[i];
+                time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 60 and *ListeEntites[i] < 80 ) {
-            int random = rand()%((11 - 1) + 1) + 1;
+            int random = rand()%((9 - 2) + 1) + 2;
             if (random == 6 or random == 2) {
                 *ListeEntites[i] = 100;
-                time = time + ListTime[i];
+                time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 40 and *ListeEntites[i] < 60 ) {
-            int random = rand()%((8 - 1) + 1) + 1;
+            int random = rand()%((7 - 1) + 1) + 1;
             if (random == 6 or random == 1) {
                 *ListeEntites[i] = 100;
-                time = time + ListTime[i];
+                time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 20 and *ListeEntites[i] < 40 ) {
-            int random = rand()%((6 - 1) + 1) + 1;
+            int random = rand()%((5 - 1) + 1) + 1;
             if (random == 1 or random == 2) {
                 *ListeEntites[i] = 100;
-                time = time + ListTime[i];
+                time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 0 and *ListeEntites[i] < 20 ) {
-            int random = rand()%((4 - 0) + 1) + 0;
+            int random = rand()%((2 - 0) + 1) + 0;
             if (random == 2 or random == 1) {
                 *ListeEntites[i] = 100;
-                time = time + ListTime[i];
+                time = time - ListTime[i];
             }
         }
     }
