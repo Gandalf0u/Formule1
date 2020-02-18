@@ -118,11 +118,12 @@ void Voiture::AfficherEtat() const{
 }
 
 void Voiture::Vitesse() {
-    Moyenne = 100 - (pression_pneu/2 + usure_pneu/2 + frein*(3/2) + moteur*3 + niveau_huile/2 + carosserie/2 + suspensions + direction + boite_vitesse*2) / 10;
+    Moyenne = 1000 - (150 + pression_pneu + usure_pneu + frein + moteur + carosserie + suspensions + direction + boite_vitesse);
+    Moyenne = Moyenne/2.5;
     if (Moyenne < 0){
         Moyenne = 0;
     }
-    vitesse = vitesse - Moyenne;
+    vitesse = 350 - Moyenne;
     time = time + vitesse;
 }
 
@@ -267,7 +268,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (usure_pneu != 100) {
                         usure_pneu = 100;
-                        time = time - 30;
+                        time = time - 40;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les pneus ont ete change" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -279,7 +280,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (pression_pneu != 100) {
                         pression_pneu = 100;
-                        time = time - 20;
+                        time = time - 30;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les pneus ont ete regonfle" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -291,7 +292,7 @@ void Voiture::Reparer () {
                 case 3:
                     if (suspensions != 100) {
                         suspensions = 100;
-                        time = time - 40;
+                        time = time - 50;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les suspensions ont ete change" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -303,7 +304,7 @@ void Voiture::Reparer () {
                 case 4:
                     if (frein != 100) {
                         frein = 100;
-                        time = time - 50;
+                        time = time - 60;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Les freins ont ete change" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -337,7 +338,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (moteur != 100) {
                         moteur = 100;
-                        time = time - 70;
+                        time = time - 80;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le moteur a ete repare" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -349,7 +350,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (boite_vitesse != 100) {
                         boite_vitesse = 100;
-                        time = time - 65;
+                        time = time - 75;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "La boite de vitesse a ete repare" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -383,7 +384,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (carosserie != 100) {
                         carosserie = 100;
-                        time = time - 50;
+                        time = time - 60;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "La carosserie a ete repare" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -395,7 +396,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (direction != 100) {
                         direction = 100;
-                        time = time - 35;
+                        time = time - 45;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "La direction a ete passe en revue" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -429,7 +430,7 @@ void Voiture::Reparer () {
                 case 1:
                     if (essence != 100) {
                         essence = 100;
-                        time = time - 60;
+                        time = time - 20;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le plein d'essence a ete fait" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -441,7 +442,7 @@ void Voiture::Reparer () {
                 case 2:
                     if (niveau_huile != 100) {
                         niveau_huile = 100;
-                        time = time - 40;
+                        time = time - 20;
                         SetConsoleTextAttribute(hConsole, 10);
                         cout << "Le niveau d'huile a ete fait" << endl;
                         SetConsoleTextAttribute(hConsole, 15);
@@ -468,32 +469,53 @@ void Voiture::Reparer () {
 void Voiture::BotRepair() {
     
     int* ListeEntites[10] = {&pression_pneu, &usure_pneu, &frein, &moteur, &niveau_huile, &essence, &carosserie, &suspensions, &boite_vitesse, &direction};
-    int ListTime[10] = {30, 40, 50, 70, 40, 60, 50, 45, 65, 35};
+    int ListTime[10] = {40, 50, 60, 80, 20, 20, 60, 55, 75, 45};
     
     for (int i = 0; i < 9; i++) {
-        if (*ListeEntites[i] > 80 and *ListeEntites[i] < 100 ) {
-            int random = rand()%((12 - 2) + 1) + 2;
+        if (*ListeEntites[i] > 95 and *ListeEntites[i] < 100 ) {
+            int random = rand() % ((52 - 2) + 1) + 2;
             if (random == 10) {
                 *ListeEntites[i] = 100;
                 time = time - ListTime[i];
             }
         }
+        else if (*ListeEntites[i] > 90 and *ListeEntites[i] < 95 ) {
+            int random = rand() % ((42 - 2) + 1) + 2;
+            if (random == 10) {
+                *ListeEntites[i] = 100;
+                time = time - ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 85 and *ListeEntites[i] < 90 ) {
+            int random = rand() % ((37 - 2) + 1) + 2;
+            if (random == 10) {
+                *ListeEntites[i] = 100;
+                time = time - ListTime[i];
+            }
+        }
+        else if (*ListeEntites[i] > 80 and *ListeEntites[i] < 85 ) {
+            int random = rand()%((32 - 2) + 1) + 2;
+            if (random == 10) {
+                *ListeEntites[i] = 100;
+                time = time - ListTime[i];
+            }    
+        }
         else if (*ListeEntites[i] > 60 and *ListeEntites[i] < 80 ) {
-            int random = rand()%((9 - 2) + 1) + 2;
+            int random = rand()%((22 - 2) + 1) + 2;
             if (random == 6 or random == 2) {
                 *ListeEntites[i] = 100;
                 time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 40 and *ListeEntites[i] < 60 ) {
-            int random = rand()%((7 - 1) + 1) + 1;
+            int random = rand()%((11 - 1) + 1) + 1;
             if (random == 6 or random == 1) {
                 *ListeEntites[i] = 100;
                 time = time - ListTime[i];
             }
         }
         else if (*ListeEntites[i] > 20 and *ListeEntites[i] < 40 ) {
-            int random = rand()%((5 - 1) + 1) + 1;
+            int random = rand()%((6 - 1) + 1) + 1;
             if (random == 1 or random == 2) {
                 *ListeEntites[i] = 100;
                 time = time - ListTime[i];
@@ -509,3 +531,128 @@ void Voiture::BotRepair() {
     }
 }
 
+
+void Voiture::events() {
+    int random = 0;
+    
+    // Petite sortie de piste
+    if (direction > 90){
+        int random = rand()%((200 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            carosserie = carosserie - 10;
+            time -= 50;
+            cout << "Legere sortie de piste pour la voiture " << numero << ", esperons que le pilote va bien" << endl;
+        }
+    }
+    if (direction < 90 and direction > 70){
+        int random = rand()%((100 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            carosserie = carosserie - 10;
+            time -= 50;
+            cout << "Legere sortie de piste pour la voiture " << numero << ", esperons que le pilote va bien" << endl;
+        }
+    }
+    if (direction < 70 and direction > 50){
+        int random = rand()%((70 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            carosserie = carosserie - 10;
+            time -= 50;
+            cout << "Legere sortie de piste pour la voiture " << numero << ", esperons que le pilote va bien" << endl;
+        }
+    }
+    if (direction < 50 and direction > 30){
+        int random = rand()%((30 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            carosserie = carosserie - 10;
+            time -= 50;
+            cout << "Legere sortie de piste pour la voiture " << numero << ", esperons que le pilote va bien" << endl;
+        }
+    }
+
+    // Grave sortie de piste
+    if (direction > 70){
+        random = rand()%((1000 - 0) + 1) + 0;
+        if (random == 1) {
+            enVie = false;
+            cout << "Grave sortie de piste pour la voiture " << numero << ", qui est en feu, esperons que le pilote va bien" << endl;
+        }
+        
+    }
+    else if (direction < 70 and direction < 40) {
+        random = rand()%((500 - 0) + 1) + 0;
+        if (random == 1) {
+            enVie = false;
+            cout << "Grave sortie de piste pour la voiture " << numero << ", qui est en feu, esperons que le pilote va bien" << endl;
+            }
+    }
+    else if (direction < 40) {
+    random = rand()%((120 - 0) + 1) + 0;
+        if (random == 1) {
+            enVie = false;
+            cout << "Grave sortie de piste pour la voiture " << numero << ", qui est en feu, esperons que le pilote va bien" << endl;
+            }
+    }
+        
+    // petite collision
+    random = rand()%((140 - 0) + 1) + 0;
+        if (random == 1) {
+            carosserie -= 20;
+            time -= 40;
+            cout << "La voiture " << numero << " a heurte une barriere, rien de grave mais elle pert un peu de temps" << endl;
+        }
+
+    // chute météorique
+
+    random = rand()%((5000 - 0) + 1) + 0;
+    if (random == 1) {
+        enVie = false;
+        cout << "La voiture " << numero << " vient de se faire ecraser par une météorite venant de l'espace" << endl;
+    }
+
+    // Virage
+
+    random = rand()%((21 - 0) + 1) + 0;
+    if (random == 1) {
+        time -= 20;
+        cout << "La voiture " << numero << " vient de rater un virage et a perdu du terrain.." << endl;
+    }
+
+    // glissade
+
+    if (pression_pneu < 90) {
+        
+        if(usure_pneu < 60 and circuit.getUsure() < 45){
+            random = rand()%((50 - 1) + 1) + 1;
+        }
+        else if (usure_pneu < 60 and circuit.getUsure() < 70) {
+            random = rand()%((20 - 1) + 1) + 1;
+        }
+        else {
+            random = rand()%((140 - 1) + 1) + 1;
+        }
+        if(random == 1) {
+            cout << "La voiture " << numero << " a glisse et a failli, probleme d'adherence à la piste ??" << endl;
+            usure_pneu -= 20;
+            time -= 30;
+        }
+    }
+    
+
+    //Moteur
+
+    if (moteur < 30 and niveau_huile < 10){
+        int random = rand()%((10 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            enVie = false;
+            cout << "Explosion du moteur pour la voiture " << numero << ", la course est terminee pour elle " << endl;
+        }
+    }
+    if (moteur < 15 and niveau_huile < 5){
+        int random = rand()%((5 - 0) + 1) + 0;
+        if (random == 2 or random == 1) {
+            enVie = false;
+            cout << "Explosion du moteur pour la voiture " << numero << ", la course est terminee pour elle " << endl;
+        }
+    }
+
+}

@@ -69,6 +69,7 @@ int main() {
         //Usure d'un tour de piste
         for (int i = 0; i < 22; i++) {
             if (voiture[i]->getEnVie()) {
+                voiture[i]->events();
                 voiture[i]->Essence();
                 voiture[i]->Frein();
                 voiture[i]->Pneus();
@@ -123,7 +124,6 @@ int main() {
        else {
             cout << "  et VOITURE 2 : " << pos2 << "eme." << endl;
        }
-        cout << "time total voiture 1: " << voiture1.getTime() << endl;
 
         //========================================
         //Fin du tour de piste
@@ -157,12 +157,26 @@ int main() {
         }
 
         if (! voiture1.getEnVie() and ! voiture2.getEnVie()) {
-            cout << "Les 2 voitures dont vous etiez responsable sont detruites ou en panne, vous decidez de fuir." << endl;
+            cout << "Les 2 voitures dont vous etiez responsable sont detruites ou en panne, vous decidez de fuir pour eviter la faillite." << endl;
             break;
         }
 
-    }
+        //FIN
 
+        if (tour == 50){
+            cout << "classement de la course :" << endl;
+            int u = 0;
+            for (auto const& entry: classement) {
+                u = u + 1;
+                if (u == 1) {
+                    cout << "Voiture numero " <<entry.second << " : "<< u << "ere"<<endl;
+                }
+                else {
+                    cout << "Voiture numero " <<entry.second << " : "<< u << "eme"<<endl;
+                }
+            }
+        }
+    }
     return 0;
 }
 

@@ -20,6 +20,7 @@ public:
     void verif();
     void BotRepair();
     int getTime() const;
+    void events();
 
 private:
 
@@ -37,9 +38,9 @@ private:
     int position;
 
     int numero;
-    int vitesse = 350;
     int Moyenne = 0;
     int time = 0;
+    int vitesse = 350;
     bool enVie = true;
 
     Piste circuit;
