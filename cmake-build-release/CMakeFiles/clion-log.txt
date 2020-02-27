@@ -1,0 +1,4 @@
+D:\JetBrains\apps\CLion\ch-0\193.6015.37\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - MinGW Makefiles" D:\dev\C++\Formule1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/dev/C++/Formule1/cmake-build-release
