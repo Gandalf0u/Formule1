@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-D:/dev/C++/Formule1/Piste.cpp
+C:/Users/maxen/CLionProjects/formul111/Piste.cpp
 Piste.h
-D:/dev/C++/Formule1/Piste.h
+C:/Users/maxen/CLionProjects/formul111/Piste.h
 ctime
 -
 random
@@ -16,23 +16,23 @@ random
 iostream
 -
 
-D:/dev/C++/Formule1/Piste.h
+C:/Users/maxen/CLionProjects/formul111/Piste.h
 
-D:/dev/C++/Formule1/Voiture.cpp
+C:/Users/maxen/CLionProjects/formul111/Voiture.cpp
 Voiture.h
-D:/dev/C++/Formule1/Voiture.h
+C:/Users/maxen/CLionProjects/formul111/Voiture.h
 Piste.h
-D:/dev/C++/Formule1/Piste.h
+C:/Users/maxen/CLionProjects/formul111/Piste.h
 iostream
 -
 windows.h
 -
 
-D:/dev/C++/Formule1/Voiture.h
+C:/Users/maxen/CLionProjects/formul111/Voiture.h
 Piste.h
-D:/dev/C++/Formule1/Piste.h
+C:/Users/maxen/CLionProjects/formul111/Piste.h
 
-D:/dev/C++/Formule1/main.cpp
+C:/Users/maxen/CLionProjects/formul111/main.cpp
 iostream
 -
 random
@@ -46,9 +46,9 @@ map
 windows.h
 -
 Voiture.h
-D:/dev/C++/Formule1/Voiture.h
+C:/Users/maxen/CLionProjects/formul111/Voiture.h
 Piste.h
-D:/dev/C++/Formule1/Piste.h
+C:/Users/maxen/CLionProjects/formul111/Piste.h
 unistd.h
 -
 
